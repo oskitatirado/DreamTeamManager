@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Recommender System Movielens</title>
+<style>
+body{
+position:relative; left:80px;}
+}
+</style>
+{% load appFilter %}
+</head>
+<body>
+<header>
+{% include 'header.html' %}
+</header>
+
+<table border="1" width="600">
+<tr>
+<td>Jugador</td>
+<td>Equipo</td>
+<td>Puntuacion</td>
+
+
+</tr>
+
+{% for u in contacts %}
+<tr>
+<td>{{ u.nombreJugador }} {{ u.apellidosJugador }}</td>
+<td>
+{{ u.equipo }}</td>
+<td>{{ u.puntuacion }}
+</td>
+
+</tr>
+{% endfor %}
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+<div>
+
+<form action = "/cargarPuntuacion/" method = "POST" enctype = "multipart/form-data" class = "form-horizontal"> 
+{% csrf_token %} 
+<div class = "form- group "> 
+    <label for =" name "class ="col-md-3 col-sm-3 col-xs-12 control-label "> Archivo: </label> 
+    <div class =" col-md-8 " > 
+        <input type = "file" name = "csv_file" id = "csv_file" required="True" class="form-control"> 
+    </div>                     
+</div> 
+<div class = "form-group">                     
+    <div class = "col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style = "margin-bottom:10px; "> 
+         <button class =" btn btn-primary "> <span class =" glyphicon glyphicon-upload "style =" margin-right: 5px; "> </span> Upload </button> 
+    </div> 
+</div>
+</form>
+
+</div>
+<div>
+
+ <a href="/downloadCSV/">Dowmload CSV</a>
+</div>
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="/static/tfg.js"></script>
+
+
+{% endblock %}
+</body>
+</html>

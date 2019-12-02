@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Recommender System Movielens</title>
+<style>
+body{
+position:relative; left:80px;}
+}
+</style>
+{% load appFilter %}
+</head>
+<body>
+<header>
+{% include 'header.html' %}
+</header>
+
+
+{% if not error %}
+
+<table border="1" width="600">
+<tr>
+<td>Jugador</td>
+<td>Posicion</td>
+<td>Estado</td>
+<td>Puntuacion Semana</td>
+
+
+</tr>
+
+{% for j in jugadores %}
+<tr>
+<td>{{ j.nombreJugador }} {{ j.apellidosJugador }}</td>
+<td>
+{% get_posicion j.posicion %}</td>
+<td>
+{% if j.idJugador in titulares %}
+Titular
+{% else %}
+Suplente
+{% endif %}
+</td>
+<td>{{ j.puntuacion }}
+</td>
+{% endfor %}
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td> Total</td>
+<td> {{puntuacion}}</td>
+</tr>
+
+</table>
+
+{% else %}
+{{error}}
+
+{% endif %}
+
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="/static/tfg.js"></script>
+
+
+{% endblock %}
+</body>
+</html>

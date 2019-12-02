@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Recommender System Movielens</title>
+
+
+</head>
+<body>
+<header>
+{% include 'header.html' %}
+
+
+
+
+<h1>Realizadas</h1>
+<table border="1" width="600">
+<tr>
+<td>Jugador</td>
+<td>Valor</td>
+<td>Oferta</td>
+<td>Propietario</td>
+<td>Fecha</td>
+<td>Estado</td>
+
+
+</tr>
+
+{% for j in solicitudes %}
+<tr>
+<td>{{ j.jugadores.nombreJugador }} {{j.jugadores.apellidosJugador}}</td>
+<td>
+{{ j.jugadores.valor }}</td>
+<td>{{ j.valor }}
+</td>
+<td>{{ j.ofertante }}
+</td>
+<td>{{ j.fechaPuja|date:'Y-m-d H:i' }}
+</td>
+<td>
+{% if j.estadoPuja == 'P'  %}
+Pendiente
+{% elif j.estadoPuja == 'R'  %}
+Rechazada
+{% else %}
+Aceptada
+{% endif%}
+</td>
+
+                   
+</tr>
+{% endfor %}
+</table>
+
+
+
+<h1>Recibidas</h1>
+<table border="1" width="600">
+<tr>
+<td>Jugador</td>
+<td>Valor</td>
+<td>Oferta</td>
+<td>Comprador</td>
+<td>Fecha</td>
+<td>Estado</td>
+
+
+</tr>
+
+{% for j in ofertas %}
+<tr>
+<td>{{ j.jugadores.nombreJugador }} {{j.jugadores.apellidosJugador}}</td>
+<td>
+{{ j.jugadores.valor }}</td>
+<td>{{ j.valor }}
+</td>
+<td>{{ j.pujador }}
+</td>
+<td>
+{{ j.fechaPuja|date:'Y-m-d H:i' }}
+</td>
+<td>
+{% if j.estadoPuja == 'P'  %}
+Pendiente
+{% elif j.estadoPuja == 'R'  %}
+Rechazada
+{% else %}
+Aceptada
+{% endif%}
+</td>
+{% if j.estadoPuja == 'P'  %}
+<td>
+<a href="/aceptarPuja/{{j.idPuja}}/">
+    <button>Aceptar</button>
+</a>
+<a href="/rechazarPuja/{{j.idPuja}}/">
+    <button>Rechazar</button>
+</a>
+
+</td>
+
+   {% endif %}               
+</tr>
+{% endfor %}
+</table>
+
+<div>
+	<a href="/ofrecer/">Ofrecer</a>
+</div>
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="/static/tfg.js"></script>
+
+
+{% endblock %}
+</body>
+</html>

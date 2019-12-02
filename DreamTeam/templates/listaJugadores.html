@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Dream Team Manager</title>
+</head>
+<body>
+{% include 'header.html' %}
+<section>
+<h1>Jugadores Agente Libre</h1>
+{% for jugador in usuario.jugador_set.all %}
+<ul>Nombre: {{jugador.nombreJugador}} - Apellido: {{jugador.apellidosJugador}}</ul><br/>
+{% endfor %}
+</section>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Recommender System Movielens</title>
+</head>
+<body>
+{% include 'header.html' %}
+ <h2>Registro</h2>
+  <form method="post" action='/tipoLiga/'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Continuar</button>
+  </form>
+</body>
+</html>

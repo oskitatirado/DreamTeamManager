@@ -1,0 +1,18 @@
+Jaylen#Brown#Estados Unidos#B#Boston Celtics 
+Carsen#Edwards#Estados Unidos#B#Boston Celtics 
+Tacko#Fall#Senegal#P#Boston Celtics 
+Javonte#Green#Estados Unidos#E-A#Boston Celtics 
+Gordon#Hayward#Estados Unidos#A#Boston Celtics 
+Enes#Kanter#Turquia#P#Boston Celtics 
+Romeo#Langford#Estados Unidos#B#Boston Celtics 
+Semi#Ojeleye#Estados Unidos#A#Boston Celtics 
+Vincent#Poirier#Francia#P#Boston Celtics 
+Marcus#Smart#Estados Unidos#B#Boston Celtics 
+Max#Strus#Estados Unidos#B#Boston Celtics 
+Jayson#Tatum#Estados Unidos#A#Boston Celtics 
+Daniel#Theis#Alemania#A#Boston Celtics 
+Kemba#Walker#Estados Unidos#B#Boston Celtics 
+Brad#Wanamaker#Estados Unidos#B#Boston Celtics 
+Tremont#Waters#Estados Unidos#B#Boston Celtics 
+Grant#Williams#Estados Unidos#A#Boston Celtics 
+Robert#Williams III#Estados Unidos#AP#Boston Celtics 

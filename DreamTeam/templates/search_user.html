@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Recommender System Movielens</title>
+</head>
+<body>
+<header>
+{% include 'header.html' %}
+
+<h1>Search user</h1>
+<form id='form' method='get' action=''>
+{{form.as_p}}
+ <option value="" disabled selected></option>
+<p><input type='submit' value='Confirm'/></p>
+</form>
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).on('change','#id_base',function () {
+       $.ajax({
+    	   url:'/suplente',
+    	   data:{
+    		   base:$('#id_base').val()
+    		   
+    	   },
+    	   sucess:function(){
+    		   
+    	   }
+       });
+    });
+</script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,25 @@
+<header>
+<nav>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/populate">Populate database</a></li>
+		<li><a href="/listaAgenteLibre">Lista Agente Libre</a></li>
+		<li><a href="/addUsuario">Anadir</a></li>
+		<li><a href="/remUsuario">Eliminar</a></li>
+		<li><a href="/alinSemanal">Guardar alineacion semanal</a></li>
+		<li><a href="/puntuacion">Puntuacion Admin</a></li>
+		<li><a href="/signup">Registrarse</a></li>
+		{% if user.is_authenticated %}
+		<li><a href="/logout">Logout</a></li>
+		<li><a href="/mercado">Mercado</a></li>
+		<li><a href="/misPujas">Mis Pujas</a></li>
+		<li><a href="/clasificacion">Clasificacion</a></li>
+		<li><a href="/semanal">Clasificacion Semanal</a></li>
+		<li><a href="/create/alineacion">Alineacion</a></li>
+		{%endif%}
+		<li><a href="/crearMercado">Crear Mercado</a></li>
+	
+		
+	</ul>
+</nav>
+</header>

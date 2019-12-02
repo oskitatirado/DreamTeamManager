@@ -1,0 +1,37 @@
+<div class="modal-dialog modal-lg">
+        <div class="modal-content">
+                
+                <form role="form" action="/addMercado/" method="post" onsubmit="return validVenta()">
+                
+                        <div class="modal-header">
+                
+                <h3>Vender Jugador</h3>
+            </div>
+            <div class="modal-body">
+                                {% csrf_token %}
+                                <div class="panel panel-default">
+                                        <div class="panel-body">
+                                               <div>
+        											<input type="hidden" id="valor_jugador" name="valor_jugador" value="{{precio}}"/>
+       											  <input type="hidden" id="id_jugador" name="id_jugador" value="{{id}}"/>
+       											  <input type="hidden" name="botPress" id="cond" value="vender">
+    											</div>
+   										 <div>
+        										<label for="valor">Valor mercado:</label>
+       											 <input type="text" id="valor" name="valor" />
+   												 </div>
+                                        </div>
+                                        <span id = "error-name2"> </span>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <div class="col-lg-12 text-right">
+                                        <input type="submit" class="btn btn-primary" name="_vender"  value="Guardar" />
+                                       
+                                </div>
+                        </div>
+                </form>
+        </div>
+</div>
+
+

@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>Recommender System Movielens</title>
+<style>
+body{
+position:relative; left:80px;}
+}
+</style>
+{% load appFilter %}
+</head>
+<body>
+<header>
+{% include 'header.html' %}
+</header>
+
+
+
+<h1>Jugadores</h1>
+<table border="1" width="600">
+<tr>
+<td>Jugador</td>
+<td>Posicion</td>
+<td>Puntuacion</td>
+<td>Valor</td>
+<td>Valor Mercado</td>
+<td>Propietario</td>
+<td>Pujar</td>
+
+</tr>
+
+{% for j in jugadores %}
+<tr>
+<td>{{ j.nombreJugador }} {{j.apellidosJugador}}</td>
+<td>
+{{ j.posicion }}</td>
+<td>{{ j.totalPuntuacion }}
+</td>
+<td>{{ j.valor }}
+</td>
+<td>{{ j.valorMercado }}
+</td>
+<td>
+{{ j.usuarios }}
+</td>
+ {% if not j.usuarios.user == user %}
+{% get_venta j.idJugador user.username as cond %}
+                        {% if not cond %}
+                        
+  <td >
+                        
+                      <a onclick="return abrir_modal('crearPuja/{{j.idJugador}}')" >
+                            Pujar
+                        </a> </td>
+                        
+                        {% else %}
+                        <td>
+                         <a onclick="return abrir_modal('crearPuja/{{j.idJugador}}')" >
+                             Editar/Cancelar Pujar
+                        </a> 
+                         </td>
+                         <td>
+                        {% get_oferta j.idJugador user.username %}
+                        </td>
+                      {% endif %}
+                      {%else%}
+                      <td></td>
+                   {% endif %}
+</tr>
+{% endfor %}
+</table>
+<div>
+	<a href="/valor/"> Dar valor</a>
+</div>
+
+<div id="popup" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+
+</div>
+
+
+
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="/static/tfg.js"></script>
+
+
+{% endblock %}
+</body>
+</html>

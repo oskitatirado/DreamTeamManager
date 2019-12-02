@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>Recommender System Movielens</title>
+<style>
+body{
+position:relative; left:80px;}
+
+</style>
+</head>
+<body>
+<header>
+{% include 'header.html' %}
+</header>
+<div id="popup" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+
+</div>
+<div>
+<h1>Alineacion</h1>
+<form id="id_form" action="/guardarAlineacion" method="POST">
+{% csrf_token %}
+    <div class="row">
+        <div class="input-field col s6 offset-s3">
+            <select id="id_base" onchange="cargarBase()" name="base">
+            	<option value="-1" disabled selected> Elige tu base titular</option>
+                {% for d in bases %}
+                <option value=" {{d.idJugador}} " {% if d.idJugador == b %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}}</option>
+            {% endfor %}
+            </select>
+            <label>Base</label>
+        </div>
+          <div class="row">
+        <div class="input-field col s6 offset-s3">
+            <select id="id_escolta" onchange="cargarEscolta()" name="escolta">
+            	<option value="-1" disabled selected> Elige tu escolta titular</option>
+                {% for d in escoltas %}
+                <option value=" {{d.idJugador}} " {% if d.idJugador == e %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}}</option>
+            {% endfor %}
+            </select>
+            <label>Escolta</label>
+        </div>
+          <div class="row">
+        <div class="input-field col s6 offset-s3">
+            <select id="id_alero" onchange="cargarAlero()" name="alero">
+            	<option value="-1" disabled selected> Elige tu alero titular</option>
+                {% for d in aleros %}
+                <option value=" {{d.idJugador}} " {% if d.idJugador == a %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}}</option>
+            {% endfor %}
+            </select>
+            <label>Alero</label>
+        </div>
+          <div class="row">
+        <div class="input-field col s6 offset-s3">
+            <select id="id_ap" onchange="cargarAP()" name="ap">
+            	<option value="-1" disabled selected> Elige tu ala-pivot titular</option>
+                {% for d in alapivots %}
+                <option value=" {{d.idJugador}} " {% if d.idJugador == ap %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}}</option>
+            {% endfor %}
+            </select>
+            <label>Ala Pivot</label>
+        </div>
+          <div class="row">
+        <div class="input-field col s6 offset-s3">
+            <select id="id_pivot" onchange="cargarPivot()" name="pivot">
+            	<option value="-1" disabled selected> Elige tu pivot titular</option>
+                {% for d in pivots %}
+                <option value=" {{d.idJugador}} " {% if d.idJugador == p %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}}</option>
+            {% endfor %}
+            </select>
+            <label>Pivot</label>
+        </div>
+        <div class="input-field col s6 offset-s3">
+            <select id="id_suplente1" name="baseS">
+            	<option value="-1" disabled selected> Elige tu base suplente</option>
+            {% for d in suplentes1 %}
+               <option value=" {{d.idJugador}} " {% if d.idJugador == bs %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}} </option>
+            {% endfor %}
+            </select>
+            <label>Suplente Base</label> 
+        </div>
+         <div class="input-field col s6 offset-s3">
+            <select id="id_suplente2" name="escoltaS" onchange="cargarAleroSuplente()">
+            <option value="-1" disabled selected> Elige tu escolta suplente</option>
+            {% for d in suplentes2 %}
+               <option value=" {{d.idJugador}} " {% if d.idJugador == es %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}} </option>
+            {% endfor %}
+            </select>
+            <label>Suplente Escolta</label> 
+        </div>
+         <div class="input-field col s6 offset-s3">
+            <select id="id_suplente3" name="aleroS"  onchange="cargarAleroSuplente()">
+            <option value="-1" disabled selected> Elige tu alero suplente</option>
+            {% for d in suplentes3 %}
+               <option value=" {{d.idJugador}} " {% if d.idJugador == as %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}} </option>
+            {% endfor %}
+            </select>
+            <label>Suplente Alero</label> 
+        </div>
+         <div class="input-field col s6 offset-s3">
+            <select id="id_suplente4" name="apS">
+            <option value="-1" disabled selected> Elige tu ala-pivot suplente</option>
+            {% for d in suplentes4 %}
+               <option value=" {{d.idJugador}} " {% if d.idJugador == aps %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}} </option>
+            {% endfor %}
+            </select>
+            <label>Suplente Ala Pivot</label> 
+        </div>
+         <div class="input-field col s6 offset-s3">
+            <select id="id_suplente5" name="pivotS">
+            <option value="-1" disabled selected> Elige tu pivot suplente</option>
+            {% for d in suplentes5 %}
+               <option value=" {{d.idJugador}} " {% if d.idJugador == ps %}selected{% endif %}>{{ d.nombreJugador }} {{d.apellidosJugador}} </option>
+            {% endfor %}
+            </select>
+            <label>Suplente Pivot</label> 
+        </div>
+        <p><input type='submit' value='Confirm'/></p>
+    </div>
+   
+</form>
+
+</div>
+<div>
+
+<h1>Jugadores</h1>
+<table border="1" width="600">
+<tr>
+<td>Jugador</td>
+<td>Posicion</td>
+<td>Puntuacion</td>
+<td>Valor</td>
+</tr>
+
+{% for j in jugadores %}
+<tr>
+<td>{{ j.nombreJugador }} {{j.apellidosJugador}}</td>
+<td>
+{{ j.posicion }}</td>
+<td>{{ j.totalPuntuacion }}
+</td>
+<td>{{ j.valor }}
+</td>
+{% if not j.mercado %}
+<td >
+                        
+    <a onclick="return abrir_modal('/vender/{{j.idJugador}}')" >
+                            Vender
+       </a> </td>
+       {% else %}
+       <td >
+                        
+    <a href="/quitarMercado/{{j.idJugador}}" onclick="return confirm('Seguro que quieres quitar del mercado')" >
+                            Quitar de mercado
+       </a> </td>
+{% endif %}
+</tr>
+{% endfor %}
+</table>
+</div>
+
+
+
+
+
+
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="/static/tfg.js"></script>
+
+{% endblock %}
+</body>
+</html>

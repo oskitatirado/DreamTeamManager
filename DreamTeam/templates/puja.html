@@ -1,0 +1,30 @@
+<div class="modal-dialog modal-lg">
+        <div class="modal-content">
+                
+                <form role="form" action="/puja/" method="post" onsubmit="return valid()">
+                
+                        <div class="modal-header">
+                
+                <h3>Modificar puja</h3>
+            </div>
+            <div class="modal-body">
+                                {% csrf_token %}
+                                <div class="panel panel-default">
+                                        <div class="panel-body">
+                                               {{form.as_p}}
+                                        </div>
+                                        <span id = "error-name"> </span>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <div class="col-lg-12 text-right">
+                                        <input type="submit" class="btn btn-primary" name="_guardar" value="Guardar" />
+                                        <input type="submit" class="btn btn-default" name="_cancelar" value="Cancelar Puja" onclick="return confirm('Seguro?')"/>
+                                      
+                                </div>
+                        </div>
+                </form>
+        </div>
+</div>
+
+
